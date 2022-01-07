@@ -31,3 +31,12 @@ router.get('/:id', (req, res) => {
     }
   })
 })
+
+
+// TODO : 여기부터
+router.delete('/:id', (req, res) => {
+  const filter = {_id: req.params.id};
+  Feed.deleteOne(filter).exec((err, feed) => {
+    
+  });
+});
