@@ -16,7 +16,8 @@ router.get('/:id', (req, res) => {
       return res.status(200).json({
         // validation: 1,
         nickName: info["nickName"],
-        _id: info["_id"]
+        _id: info["_id"],
+        profile: info["profile"]
       });
     }
   })
@@ -25,7 +26,8 @@ router.get('/:id', (req, res) => {
 // post new user with id, nickname
 router.post('/', (req, res) => {
   const nickName = req.body.nickName;
-  User.insertMany({id: req.body.id, nickName: nickName}, (err, user) => {
+  const profile = req.body.profile;
+  User.insertMany({id: req.body.id, nickName, profiile}, (err, user) => {
     if(err) res.status(404).json({result: 0});
     else {
       console.log('add user 성공');
