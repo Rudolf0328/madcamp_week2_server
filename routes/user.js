@@ -27,7 +27,7 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   const nickName = req.body.nickName;
   const profile = req.body.profile;
-  User.insertMany({id: req.body.id, nickName, profiile}, (err, user) => {
+  User.insertMany({id: req.body.id, nickName, profile}, (err, user) => {
     if(err) res.status(404).json({result: 0});
     else {
       console.log('add user 성공');
