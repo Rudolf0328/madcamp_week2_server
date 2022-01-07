@@ -36,35 +36,38 @@ router.post('/', (req, res) => {
   });
 })
 
-// router.delete('/:userName', (req, res) => {
-//   User.deleteOne({userName: req.params.userName}, (err, d) => {
-//     if(err) res.status(200).json({result: 0});
-//     else {
-//       if(d.deletedCount === 1) return res.status(200).json({result: 1});
-//       else return res.status(200).json({result: 0});
-//     }
-//   })
-// })
+// delete user with id
+router.delete('/:id', (req, res) => {
+  User.deleteOne({id: req.params.id}, (err, d) => {
+    if(err) res.status(200).json({result: 0});
+    else {
+      if(d.deletedCount === 1) return res.status(200).json({result: 1});
+      else return res.status(200).json({result: 0});
+    }
+  })
+})
 
-// /* -------------------- Update Api -------------------- */
+// update user with id
+// 프로필 편집할 때 사용
+router.put('/:id', (req, res) => {
+  const nickName = req.body.nickName;
+  const profile = req.body.profile;
+  const newId = req.body.newId;
 
-// // update friend with json
-// router.put('/friend/add', (req, res) => {
-//   const name = req.body.userName;            // body로 받은 userName을 저장
-//   const fName = req.body.friendName;    // body로 받은 friendName을 저장
-//   User.updateOne(
-//     {userName: name},                         // 이름이 name인 사람을 찾아서햐
-//     {$push: {friends: fName}},          // friendName을 friends 배열에 추가해라
-//     function (error, success) {
-//       if(error) {
-//         console.log(error);
-//         return res.status(400).json({"result": 0});
-//       } else {
-//         console.log(success);
-//         return res.status(200).json({"result": 1});
-//       }
-//     })
-// })
+  User.updateOne(
+    {nickName, profile, id: newId},                         // 이름이 name인 사람을 찾아서햐
+    function (error, success) {
+      if(error) {
+        console.log(error);
+        return res.status(400).json({"result": 0});
+      } else {
+        console.log(success);
+        return res.status(200).json({"result": 1});
+      }
+    })
+})
+
+// TODO: feed 추가, 삭제, chatroom 삭제
 
 // // delete friend with json
 // router.put('/friend/delete', (req, res) => {

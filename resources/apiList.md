@@ -17,7 +17,7 @@ setting : 172.10.5.77
 }
 ```  
   
-[GET] api/chatroom/:roomId  
+[GET] api/chatroom/:roomId
 - response
 ```
 {
@@ -38,7 +38,7 @@ setting : 172.10.5.77
 ```
 
 ## POST
-[POST] api/user/ : 새로운 유저 가입  
+[POST] api/user/ : 새로운 유저 가입
 - request
 ```
 {
@@ -88,3 +88,27 @@ setting : 172.10.5.77
 {
   result: 0 or 1  // 전송되면 1 아니면 0 뭐 그런거
 }
+
+## PUT
+[PUT] api/user/:id  // 프로필 편집, 업데이트 할 때 사용
+- request
+```
+{
+  nickName: "루돌프",
+  profile: "이미지",
+  newId: "ck0716060"   // 새로 바꿀 아이디
+}
+```
+- response
+{
+  result: 0 or 1    // 성공하면 1, 실패하면 0
+}
+
+## DELETE
+[DELETE] api/user/:id   // 탈퇴 시 사용  
+- response
+```
+{
+  result: 0 or 1    // 성공하면 1, 실패하면 0
+}
+```
