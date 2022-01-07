@@ -1,5 +1,4 @@
 # API LIST
-setting : 172.10.5.77
 
 성공 : 200  
 연결 끊김 : 404  
@@ -16,7 +15,15 @@ setting : 172.10.5.77
   profile: String
 }
 ```  
-  
+
+[GET] api/user/feeds/:id
+- response
+```
+{
+  feeds: ["feed"]   //  혹시 피드만 불러올 일이 있을까봐 따로 만들었는데 get user 랑 합쳐도 되면 말해줭
+}
+```
+
 [GET] api/chatroom/:roomId
 - response
 ```
@@ -33,9 +40,21 @@ setting : 172.10.5.77
       chatroomId: "엄청 긴거"   // 채팅방 id 일단 주는데 굳이 필요한가? 안 쓰면 빼줄게
     }
   ]   // 일단 많이 주는데 얼마나 줄 수 있는지 모르겠다.
-                    // 만약에 한계가 있으면 recyclerview에서 위로 올릴 때마다 줘야 될지도...
+      // 만약에 한계가 있으면 recyclerview에서 위로 올릴 때마다 줘야 될지도...
 }
 ```
+
+[GET] api/feed/:id  : feed id를 통해 feed 불러오기 그니까 feed id 길어도 잘 보관해
+- response
+```
+{
+  nickName: "루돌프",   // 그 닉네임..?이 나오는게 맞겠지 졸려서 생각이 잘 안돼
+  time: "시간",
+  image: "이미지 주소",
+  content: "내용"
+}
+```
+
 
 ## POST
 [POST] api/user/ : 새로운 유저 가입
@@ -88,6 +107,7 @@ setting : 172.10.5.77
 {
   result: 0 or 1  // 전송되면 1 아니면 0 뭐 그런거
 }
+```
 
 ## PUT
 [PUT] api/user/:id  // 프로필 편집, 업데이트 할 때 사용
@@ -100,9 +120,11 @@ setting : 172.10.5.77
 }
 ```
 - response
+```
 {
   result: 0 or 1    // 성공하면 1, 실패하면 0
 }
+```
 
 ## DELETE
 [DELETE] api/user/:id   // 탈퇴 시 사용  

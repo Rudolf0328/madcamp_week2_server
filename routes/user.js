@@ -23,11 +23,25 @@ router.get('/:id', (req, res) => {
   })
 })
 
+// get feed info by user id
+router.get('/feeds/:id', (req, res) => {
+  const filter = {id: req.params.id};
+  User.find(filter).exec((err, user) => {
+    if(err) return res.status(500).json({"validation": 0});
+    if(!info) return res.status(404).json({"validation": 2});
+    else {
+      return res.status(200).json({
+        feeds: user["feeds"]
+      })
+    }
+  })
+})
+
 // post new user with id, nickname
 router.post('/', (req, res) => {
   const nickName = req.body.nickName;
   const profile = req.body.profile;
-  User.insertMany({id: req.body.id, nickName, profile}, (err, user) => {
+  User.insertMany({id: req.body.id, nickName, profiile}, (err, user) => {
     if(err) res.status(404).json({result: 0});
     else {
       console.log('add user 성공');
@@ -54,7 +68,7 @@ router.put('/:id', (req, res) => {
   const profile = req.body.profile;
   const newId = req.body.newId;
 
-  User.updateOne(
+  User.updateOne({id: id},
     {nickName, profile, id: newId},                         // 이름이 name인 사람을 찾아서햐
     function (error, success) {
       if(error) {

@@ -65,4 +65,24 @@ router.post('/', (req, res) => {
   }) 
 })
 
+router.put('/:id', (req, res) => {
+  const userId = req.body.userId;
+  const filter = {chatroomId: req.params.id};
+  User.findOne({id: userId}, (error, user) => {
+    const _id = user["_id"];
+    // TODO : currentUser 늘리기
+    ChatRoom.updateOne(filter, {$push: {people: _id}}, (err, chat) => {
+      if(err) return res.status(500).json({"error": error});
+      if(!chat) return res.status(404).json({"error": error});
+      else {
+        // TODO : currentUser 하나 증가
+        const currentUser = chat["currentUser"] + 1;
+        return res.status(200).json({
+          "result": 1
+        })
+      }
+    })
+  })
+})
+
 module.exports = router;

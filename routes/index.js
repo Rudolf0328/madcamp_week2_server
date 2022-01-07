@@ -1,11 +1,3 @@
-// const express = require('express');
-// const router = express.Router();
-// const User = require('./user');
-// const {getCommitByCrawling} = require('./gitCrawler.js');
-
-
-// router.use('/user', User);
-
 const express = require('express');
 const router = express.Router();
 
