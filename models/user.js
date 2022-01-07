@@ -8,8 +8,8 @@ const user = new Schema({
   // feed table에서 user id로 필터링해서 보여주기
   // feeds: [ObjectId] // 이게 맞는지 모르겠당
   // chatrooms: [ObjectId]  // 얘도 모르겟..
-  feeds: { type: [Schema.Types.ObjectId], ref: 'User'},
-  chatrooms: {type: [Schema.Types.ObjectId], ref: 'Feed'}
+  feeds: { type: [Schema.Types.ObjectId], ref: 'Feed'},
+  chatrooms: {type: [Schema.Types.ObjectId], ref: 'ChatRoom'}
 }, {versionKey: false});
 
 module.exports = mongoose.model('User', user);

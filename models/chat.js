@@ -6,6 +6,6 @@ const chat = new Schema({
   content: String,  // 채팅 내용
   time: String, // 채팅 친 시간 string 말고 time 형식도 있을 듯
   chatroomId: {type: Schema.Types.ObjectId, ref: "ChatRoom"}  // 이 채팅이 쳐진 chat room 의 id
-},{versionKey: false});
+}, {versionKey: false});
 
 module.exports = mongoose.model('Chat', chat);
