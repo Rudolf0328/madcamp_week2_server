@@ -1,9 +1,9 @@
 # API LIST
 setting : 172.10.5.77
 
-성공 : 200
-연결 끊김 : 404
-기타 다른거 : 400
+성공 : 200  
+연결 끊김 : 404  
+기타 다른거 : 400  
 
 ## GET
 [GET] api/user/:id
@@ -11,7 +11,8 @@ setting : 172.10.5.77
 ```
 {
   nickName: "이지원",
-  feeds: ["feed id"]   // feed id list 반환?
+  feeds: ["feed"]   // feed list
+  chatRooms: ["room"] // room list
 }
 ```
 
