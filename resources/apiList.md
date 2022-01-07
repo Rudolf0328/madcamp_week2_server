@@ -11,8 +11,9 @@ setting : 172.10.5.77
 ```
 {
   nickName: "이지원",
-  feeds: ["feed"]   // feed list
-  chatRooms: ["room"] // room list
+  feeds: ["feed"],   // feed list
+  chatRooms: ["room"], // room list
+  profile: String
 }
 ```
 
