@@ -126,6 +126,31 @@
 }
 ```
 
+[PUT] api/chatroom/:id    // 채팅방에 한 명 추가 됐을 때
+- request
+```
+{
+  userId: "yelio327"    // 채팅방에 새로 들어간 유저의 id
+  
+}
+```
+
+[PUT] api/feed/:id  // feed 편집
+- request
+```
+{
+  time: "수정시간",
+  image: "수정된 사진",
+  content: "수정된 내용"
+}
+```
+- response
+```
+{
+  result: 0 or 1    // 이거 사실 업데이트하면 바뀐 정보를 주는게 맞는거 같은데 일단 두고 고쳐줄게 그게 맞겠지...?
+}
+```
+
 ## DELETE
 [DELETE] api/user/:id   // 탈퇴 시 사용  
 - response
@@ -134,3 +159,10 @@
   result: 0 or 1    // 성공하면 1, 실패하면 0
 }
 ```
+
+[DELETE] api/feed/:id   // feed 삭제 시 사용
+- response
+```
+{
+  result: 0 or 1    // 성공하면 1, 실패하면 0
+}

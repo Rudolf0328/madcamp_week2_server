@@ -32,8 +32,19 @@ router.get('/:id', (req, res) => {
   })
 })
 
+// update feed
+router.put('/:id', (req, res) => {
+  const time = req.body.time;
+  const image = req.body.image;
+  const content = req.body.content;
+  Feed.updateOne({_id: req.params.id}, {time, image, content}, function(err, success) {
+    if(err) return res.status(400).json({"result": 0});
+    else return res.status(200).json({"result": 1});
+  })
+})
 
-// TODO : 여기부터
+
+// delete feed
 router.delete('/:id', (req, res) => {
   Feed.deleteOne({_id: req.params.id}, (err, d) => {
     if(err) return res.status(200).json({result: 0});
@@ -43,3 +54,5 @@ router.delete('/:id', (req, res) => {
     }
   });
 });
+
+module.exports = router;

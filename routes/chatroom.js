@@ -28,6 +28,7 @@ router.get('/:roomId', (req, res) => {
           empty: 0,
           name: info["name"],
           ownerId: info["owner"],
+          currentUser: info["currentUser"],
           chats
         });
       })
@@ -76,10 +77,20 @@ router.put('/:id', (req, res) => {
       if(!chat) return res.status(404).json({"error": error});
       else {
         // TODO : currentUser 하나 증가
+        // TODO : 왜 안되냐 짜증나게 -_-; 귀엽네
         const currentUser = chat["currentUser"] + 1;
-        return res.status(200).json({
-          "result": 1
+        console.log(chat["currentUser"]);
+        console.log(currentUser);
+        ChatRoom.updateOne(filter, {currentUser}, (error, result) => {
+          if(error) return res.status(500).json({"error": error});
+          // 
+          else {
+            return res.status(200).json({
+              "result": 1
+            })
+          }
         })
+        // chat["currentUser"] += 1;
       }
     })
   })

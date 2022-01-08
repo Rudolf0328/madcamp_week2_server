@@ -6,6 +6,8 @@ const User = require('../models/user.js');
 const ChatRoom = require('../models/chatroom.js');
 const Chat = require('../models/chat.js');
 
+
+// get chat with chat id
 router.get('/:chatId', (req, res) => {
   // const id = new ObjectId(req.params.roomId);
   // const filter = {_id: req.params.roomId};
