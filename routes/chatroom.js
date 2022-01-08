@@ -22,15 +22,17 @@ router.get('/:roomId', (req, res) => {
         if (error) return res.status(500).json({ "validation": 3 });
         if (!chats) return res.status(200).json({ "empty": 1 });
 
-        console.log(chats);
-        return res.status(200).json({
-          // validation: 1,
-          empty: 0,
-          name: info["name"],
-          ownerId: info["owner"],
-          currentUser: info["currentUser"],
-          chats
-        });
+        else { 
+          console.log(chats);
+          return res.status(200).json({
+            // validation: 1,
+            empty: 0,
+            name: info["name"],
+            ownerId: info["owner"],
+            currentUser: info["currentUser"],
+            chats
+          });
+        }
       })
     }
   })
@@ -51,14 +53,22 @@ router.post('/', (req, res) => {
     else {
       console.log(info);
       const owner = info["_id"];
+      
+      // owner를 people에 추가하고 currentUser 없애기 그냥 People 수 세기
       ChatRoom.insertMany({ name, owner, maxUser, currentUser, image, status }, (err, chatroom) => {
         if(err) res.status(404).json({result: 0});
         else {
           console.log('add chatroom 성공');
-          console.log(chatroom);
+          console.log("여기 맞지...?" + chatroom);
           return res.status(200).json({ 
+            _id: chatroom[0]["_id"],
             result: 1,
-            _id: chatroom["_id"] 
+            test: 3,
+            name: chatroom[0]["name"],
+            currentUser: chatroom[0]["currentUser"],
+            // image: chatroom["image"],
+            maxUser: chatroom[0]["maxUser"],
+            status: chatroom[0]["status"]
           });
         }
       });
@@ -79,6 +89,7 @@ router.put('/:id', (req, res) => {
         // TODO : currentUser 하나 증가
         // TODO : 왜 안되냐 짜증나게 -_-; 귀엽네
         const currentUser = chat["currentUser"] + 1;
+        // chat["currentUser"] += 1;
         console.log(chat["currentUser"]);
         console.log(currentUser);
         ChatRoom.updateOne(filter, {currentUser}, (error, result) => {

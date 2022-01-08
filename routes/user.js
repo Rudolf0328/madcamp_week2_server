@@ -42,7 +42,7 @@ router.post('/', (req, res) => {
   const nickName = req.body.nickName;
   const profile = req.body.profile;
   User.insertMany({id: req.body.id, nickName, profile}, (err, user) => {
-    if(err) res.status(404).json({result: 0});
+    if(err) res.status(404).json({result: 0});    // 이미 있는 유저
     else {
       console.log('add user 성공');
       return res.status(200).json({result: 1});
