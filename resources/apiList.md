@@ -16,6 +16,24 @@
 }
 ```  
 
+현재
+```
+{
+    "nickName": "박정웅",
+    "_id": "61db0dedb8233af9f2acd891",
+    "profile": "https://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg",
+    "feeds": [
+        "61db1a14ad67d057df42baa2",
+        "61db1a32ad67d057df42baa7",
+        "61db1af0e869cdaa58b92a3b",
+        "61db25a5e1ca61d908832f7c",
+        "61db267be1ca61d908832f87",
+        "61db26c285b1ca4f3a110740",
+        "61db27778873ec4fdbf452f7"
+    ]
+}
+```
+
 [GET] api/user/feeds/:id        // feed id 리스트가 아니라 feed list로 바꿔보자
 - response
 ```
@@ -57,6 +75,9 @@
 
 [GET] api/feed/   :모든 feed
 
+
+현재
+쓴 사람 nickName이 안 떠 ㅠ
 
 ## POST
 [POST] api/user/ : 새로운 유저 가입
@@ -185,3 +206,9 @@
 {
   result: 0 or 1    // 성공하면 1, 실패하면 0
 }
+```
+
+현재
+```
+피드 삭제가 user feedlist에 반영이 안돼 ㅠ
+```
