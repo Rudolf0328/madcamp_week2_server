@@ -109,6 +109,23 @@
 }
 ```
 
+[POST] api/feed/  : 새로운 feed 추가
+- request
+```
+{
+  nickName: "닉네임",
+  content: "맛있었다.",
+  image: "이미지 url",
+  time: "올린 시간"
+}
+```
+- response
+```
+{
+  result: 0 or 1    // 0이면 실패 1이면 성공
+}
+```
+
 ## PUT
 [PUT] api/user/:id  // 프로필 편집, 업데이트 할 때 사용
 - request

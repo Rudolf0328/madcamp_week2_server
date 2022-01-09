@@ -28,7 +28,7 @@ router.get('/:roomId', (req, res) => {
             // validation: 1,
             empty: 0,
             name: info["name"],
-            ownerId: info["owner"],
+            owner: info["owner"],
             currentUser: info["currentUser"],
             chats
           });
@@ -58,10 +58,15 @@ router.post('/', (req, res) => {
   const currentUser = 1;
   const image = req.body.image;
   const status = true;
-  const filter = {id: req.body.ownerId};
+  const filter = {id: req.body.owner};
+  console.log(req.body)
+  console.log(req.body.owner);
   console.log(filter);
   User.findOne(filter).exec((err, info) => {
-    if(err) res.status(500).json({"error": "error"});
+    if(err)  {
+      console.log(err);
+      res.status(500).json({"error": "error"});
+    }
     if(!info) res.status(404).json({"error": "없는 유저"});
     else {
       console.log(info);
