@@ -73,7 +73,7 @@ router.post('/', (req, res) => {
       const owner = info["_id"];
       
       // owner를 people에 추가하고 currentUser 없애기 그냥 People 수 세기
-      ChatRoom.insertMany({ name, owner, maxUser, currentUser, image, status }, (err, chatroom) => {
+      ChatRoom.insertMany({ name, owner, maxUser, currentUser, image, status, $push: {people: owner} }, (err, chatroom) => {
         if(err) {
           res.status(404).json({result: 0});
           console.log(err);
@@ -81,15 +81,8 @@ router.post('/', (req, res) => {
         else {
           console.log('add chatroom 성공');
           console.log("여기 맞지...?" + chatroom);
-          return res.status(200).json({ 
-            _id: chatroom[0]["_id"],
-            result: 1,
-            test: 3,
-            name: chatroom[0]["name"],
-            currentUser: chatroom[0]["currentUser"],
-            // image: chatroom["image"],
-            maxUser: chatroom[0]["maxUser"],
-            status: chatroom[0]["status"]
+          return res.status(200).send({
+            "result": 1
           });
         }
       });

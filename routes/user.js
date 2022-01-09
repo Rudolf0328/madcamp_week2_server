@@ -17,7 +17,8 @@ router.get('/:id', (req, res) => {
         // validation: 1,
         nickName: info["nickName"],
         _id: info["_id"],
-        profile: info["profile"]
+        profile: info["profile"],
+        feeds: info["feeds"]
       });
     }
   })
@@ -28,10 +29,10 @@ router.get('/feeds/:id', (req, res) => {
   const filter = {id: req.params.id};
   User.find(filter).exec((err, user) => {
     if(err) return res.status(500).json({"validation": 0});
-    if(!info) return res.status(404).json({"validation": 2});
+    if(!user) return res.status(404).json({"validation": 2});
     else {
       return res.status(200).json({
-        feeds: user["feeds"]
+        feeds: user[0]["feeds"]
       })
     }
   })

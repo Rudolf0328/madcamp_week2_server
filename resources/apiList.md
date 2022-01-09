@@ -10,17 +10,17 @@
 ```
 {
   nickName: "이지원",
-  feeds: ["feed"],   // feed list
+  feeds: ["feedId"],   // feed list
   chatRooms: ["room"], // room list
   profile: String
 }
 ```  
 
-[GET] api/user/feeds/:id
+[GET] api/user/feeds/:id        // feed id 리스트가 아니라 feed list로 바꿔보자
 - response
 ```
 {
-  feeds: ["feed"]   //  혹시 피드만 불러올 일이 있을까봐 따로 만들었는데 get user 랑 합쳐도 되면 말해줭
+  feeds: ["feed id"]   //  혹시 피드만 불러올 일이 있을까봐 따로 만들었는데 get user 랑 합쳐도 되면 말해줭
 }
 ```
 
@@ -54,6 +54,8 @@
   content: "내용"
 }
 ```
+
+[GET] api/feed/   :모든 feed
 
 
 ## POST
@@ -109,7 +111,7 @@
 }
 ```
 
-[POST] api/feed/  : 새로운 feed 추가
+[POST] api/feed/:id  : 사람 아이디 이용해서 새로운 feed 추가
 - request
 ```
 {
