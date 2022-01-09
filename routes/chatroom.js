@@ -38,6 +38,19 @@ router.get('/:roomId', (req, res) => {
   })
 })
 
+router.get('/', (req, res) => {
+  ChatRoom.find().exec((err, chatrooms) => {
+    if(err) return res.status(500).json({ "validation": 0});
+    if(!chatrooms) return res.status(404).json({"validation": 2});
+    else {
+      console.log(chatrooms);
+      return res.status(200).send(
+        chatrooms
+      )
+    }
+  })
+})
+
 // post new chat room with a lot of information
 router.post('/', (req, res) => {
   const name = req.body.name;
@@ -56,7 +69,10 @@ router.post('/', (req, res) => {
       
       // owner를 people에 추가하고 currentUser 없애기 그냥 People 수 세기
       ChatRoom.insertMany({ name, owner, maxUser, currentUser, image, status }, (err, chatroom) => {
-        if(err) res.status(404).json({result: 0});
+        if(err) {
+          res.status(404).json({result: 0});
+          console.log(err);
+        }
         else {
           console.log('add chatroom 성공');
           console.log("여기 맞지...?" + chatroom);
@@ -104,6 +120,17 @@ router.put('/:id', (req, res) => {
         // chat["currentUser"] += 1;
       }
     })
+  })
+})
+
+// delete user with id
+router.delete('/:id', (req, res) => {
+  ChatRoom.deleteOne({id: req.params.id}, (err, d) => {
+    if(err) res.status(200).json({result: 0});
+    else {
+      if(d.deletedCount === 1) return res.status(200).json({result: 1});
+      else return res.status(200).json({result: 0});
+    }
   })
 })
 
