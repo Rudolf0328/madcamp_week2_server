@@ -9,28 +9,18 @@
 - response
 ```
 {
-  nickName: "이지원",
-  feeds: ["feedId"],   // feed list
-  chatRooms: ["room"], // room list
-  profile: String
-}
-```  
-
-현재
-```
-{
-    "nickName": "박정웅",
-    "_id": "61db0dedb8233af9f2acd891",
-    "profile": "https://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg",
-    "feeds": [
-        "61db1a14ad67d057df42baa2",
-        "61db1a32ad67d057df42baa7",
-        "61db1af0e869cdaa58b92a3b",
-        "61db25a5e1ca61d908832f7c",
-        "61db267be1ca61d908832f87",
-        "61db26c285b1ca4f3a110740",
-        "61db27778873ec4fdbf452f7"
-    ]
+  nickName: "박정웅",
+  _id: "61db0dedb8233af9f2acd891",
+  profile: "https://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg",
+  feeds: [
+    "61db1a14ad67d057df42baa2",
+    "61db1a32ad67d057df42baa7",
+    "61db1af0e869cdaa58b92a3b",
+    "61db25a5e1ca61d908832f7c",
+    "61db267be1ca61d908832f87",
+    "61db26c285b1ca4f3a110740",
+    "61db27778873ec4fdbf452f7"
+  ]
 }
 ```
 
@@ -166,8 +156,6 @@
 }
 ```
 
-//현재: 프로필 수정이 안돼요
-
 [PUT] api/chatroom/:id    // 채팅방에 한 명 추가 됐을 때
 - request
 ```
@@ -193,8 +181,6 @@
 }
 ```
 
-//현재: feed 수정시 response는 오는데 실제로 수정이 안돼용
-
 ## DELETE
 [DELETE] api/user/:id   // 탈퇴 시 사용  
 - response
@@ -215,9 +201,4 @@
 {
   result: 0 or 1    // 성공하면 1, 실패하면 0
 }
-```
-
-현재
-```
-피드 삭제가 user feedlist에 반영이 안돼 ㅠ 유저 a가 피드 리스트로 [feed1] 들고 있을때 feed1 을 삭제해도 /api/user/유저a 하면 유저 피드리스트에 [feed1]이 떠
 ```
