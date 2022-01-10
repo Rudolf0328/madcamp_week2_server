@@ -173,11 +173,13 @@
   userId: "ck07160@naver.com"
 }
 ```
+
 - response
 ```
 {
   result: 0 or 1    // 성공하면 1 실패하면 0
 }
+```
 
 [PUT] api/feed/:id  // feed 편집
 - request
