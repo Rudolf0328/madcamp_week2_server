@@ -185,3 +185,12 @@
 {
   result: 0 or 1    // 성공하면 1, 실패하면 0
 }
+```
+
+[DELETE] api/chatroom/:id   // chatroom id를 이용해서 chatroom 삭제
+- response
+```
+{
+  result: 0 or 1    // 성공하면 1, 실패하면 0
+}
+```

@@ -29,7 +29,7 @@ router.get('/:roomId', (req, res) => {
             empty: 0,
             name: info["name"],
             owner: info["owner"],
-            currentUser: info["currentUser"],
+            time: info["time"],
             chats
           });
         }
@@ -55,9 +55,9 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   const name = req.body.name;
   const maxUser = req.body.maxUser;
-  const currentUser = 1;
   const image = req.body.image;
   const status = true;
+  const time = req.body.time;
   const filter = {id: req.body.owner};
   console.log(req.body)
   console.log(req.body.owner);
@@ -72,8 +72,7 @@ router.post('/', (req, res) => {
       console.log(info);
       const owner = info["_id"];
       
-      // owner를 people에 추가하고 currentUser 없애기 그냥 People 수 세기
-      ChatRoom.insertMany({ name, owner, maxUser, currentUser, image, status, $push: {people: owner} }, (err, chatroom) => {
+      ChatRoom.insertMany({ name, owner, maxUser, time, image, status, $push: {people: owner} }, (err, chatroom) => {
         if(err) {
           res.status(404).json({result: 0});
           console.log(err);
@@ -95,27 +94,14 @@ router.put('/:id', (req, res) => {
   const filter = {chatroomId: req.params.id};
   User.findOne({id: userId}, (error, user) => {
     const _id = user["_id"];
-    // TODO : currentUser 늘리기
+
     ChatRoom.updateOne(filter, {$push: {people: _id}}, (err, chat) => {
       if(err) return res.status(500).json({"error": error});
       if(!chat) return res.status(404).json({"error": error});
       else {
-        // TODO : currentUser 하나 증가
-        // TODO : 왜 안되냐 짜증나게 -_-; 귀엽네
-        const currentUser = chat["currentUser"] + 1;
-        // chat["currentUser"] += 1;
-        console.log(chat["currentUser"]);
-        console.log(currentUser);
-        ChatRoom.updateOne(filter, {currentUser}, (error, result) => {
-          if(error) return res.status(500).json({"error": error});
-          // 
-          else {
-            return res.status(200).json({
-              "result": 1
-            })
-          }
+        return res.status(200).json({
+          "result": 1
         })
-        // chat["currentUser"] += 1;
       }
     })
   })
