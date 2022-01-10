@@ -203,7 +203,6 @@
   result: 0 or 1    // 성공하면 1, 실패하면 0
 }
 ```
-<<<<<<< HEAD
 
 [DELETE] api/chatroom/:id   // chatroom id를 이용해서 chatroom 삭제
 - response
@@ -212,5 +211,3 @@
   result: 0 or 1    // 성공하면 1, 실패하면 0
 }
 ```
-=======
->>>>>>> efce676a5b324ddafb0439d87fd010544952250e
