@@ -1,20 +1,29 @@
 # API LIST
 
 성공 : 200  
-연결 끊김 : 404  
-기타 다른거 : 400  
+연결 끊김 : 500
+없는 정보에 대한 접근 : 404  
+// 기타 다른거 : 400
 
 ## GET
 [GET] api/user/:id
 - response
 ```
 {
-  nickName: "이지원",
-  feeds: ["feedId"],   // feed list
-  chatRooms: ["room"], // room list
-  profile: String
+  nickName: "박정웅",
+  _id: "61db0dedb8233af9f2acd891",
+  profile: "https://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg",
+  feeds: [
+    "61db1a14ad67d057df42baa2",
+    "61db1a32ad67d057df42baa7",
+    "61db1af0e869cdaa58b92a3b",
+    "61db25a5e1ca61d908832f7c",
+    "61db267be1ca61d908832f87",
+    "61db26c285b1ca4f3a110740",
+    "61db27778873ec4fdbf452f7"
+  ]
 }
-```  
+```
 
 [GET] api/user/feeds/:id        // feed id 리스트가 아니라 feed list로 바꿔보자
 - response
@@ -57,6 +66,9 @@
 
 [GET] api/feed/   :모든 feed
 
+
+현재
+쓴 사람 nickName이 안 떠 ㅠ
 
 ## POST
 [POST] api/user/ : 새로운 유저 가입
@@ -179,6 +191,11 @@
 }
 ```
 
+현재
+```
+유저가 가지고 있는 피드들이 삭제가 안돼. 이건 클라이언트에서 계정삭제할때 user feed list 불러와서 하나하나 다 feed삭제 한 다음에 유저 계정 삭제해도 되긴 하는데 디비 바꾸기 어려우면 저렇게 해볼게
+```
+
 [DELETE] api/feed/:id   // feed 삭제 시 사용
 - response
 ```
@@ -186,6 +203,7 @@
   result: 0 or 1    // 성공하면 1, 실패하면 0
 }
 ```
+<<<<<<< HEAD
 
 [DELETE] api/chatroom/:id   // chatroom id를 이용해서 chatroom 삭제
 - response
@@ -194,3 +212,5 @@
   result: 0 or 1    // 성공하면 1, 실패하면 0
 }
 ```
+=======
+>>>>>>> efce676a5b324ddafb0439d87fd010544952250e
