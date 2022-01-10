@@ -196,7 +196,15 @@
 유저가 가지고 있는 피드들이 삭제가 안돼. 이건 클라이언트에서 계정삭제할때 user feed list 불러와서 하나하나 다 feed삭제 한 다음에 유저 계정 삭제해도 되긴 하는데 디비 바꾸기 어려우면 저렇게 해볼게
 ```
 
-[DELETE] api/feed/:id   // feed 삭제 시 사용
+[DELETE] api/feed/:id   // feed 삭제 시 사용 -> 이건 디비 정리할 때 사용자가 없는 피드가 있을 때만 사용
+- response
+```
+{
+  result: 0 or 1    // 성공하면 1, 실패하면 0
+}
+```
+
+[DELETE] api/feed/:id/:userId   // feed 삭제 시 사용 -> 얘는 진짜 앱에서 유저안에 있는 feeds 까지 지우기 위해 사용
 - response
 ```
 {
