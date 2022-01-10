@@ -17,23 +17,23 @@ router.get('/:roomId', (req, res) => {
     else {
       console.log('get info by room id 성공');
       console.log(info);
-      // const filter = { chatroomId: info["_id"] };
-      Chat.find({chatroomId: req.params.roomId}).exec((error, chats) => {
-        if (error) return res.status(500).json({ "validation": 3 });
-        if (!chats) return res.status(200).json({ "empty": 1 });
 
-        else { 
-          console.log(chats);
-          return res.status(200).json({
-            // validation: 1,
-            empty: 0,
-            name: info["name"],
-            owner: info["owner"],
-            time: info["time"],
-            chats
-          });
-        }
-      })
+      return res.status(200).json({
+        // validation: 1,
+        empty: 0,
+        name: info["name"],
+        owner: info["owner"],
+        time: info["time"]
+      });
+      // const filter = { chatroomId: info["_id"] };
+      // Chat.find({chatroomId: req.params.roomId}).exec((error, chats) => {
+      //   if (error) return res.status(500).json({ "validation": 3 });
+      //   if (!chats) return res.status(200).json({ "empty": 1 });
+
+      //   else { 
+      //     console.log(chats);
+      //   }
+      // })
     }
   })
 })
