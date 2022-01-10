@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const chatroom = new Schema({
   name: String,  // 채팅방 이름
-  owner: {type: Schema.Types.ObjectId, ref: 'User'}, // 채팅방 만든 주인
-  people: {type: [Schema.Types.ObjectId], ref: 'User'}, // 채팅방에 참가 중인 사람들
+  owner: {type: String, ref: 'User'}, // 채팅방 만든 주인
+  people: {type: [String], ref: 'User'}, // 채팅방에 참가 중인 사람들
   maxUser: Number,  // 채팅방의 총 사람 수
   // currentUser: Number,  // 채팅 방의 현재 참여 중인 인원
   image: Number,  // 채팅방 사진 우리가 줄 듯

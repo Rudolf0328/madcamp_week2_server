@@ -23,7 +23,8 @@ router.get('/:roomId', (req, res) => {
         empty: 0,
         name: info["name"],
         owner: info["owner"],
-        time: info["time"]
+        time: info["time"],
+        people: info["people"]
       });
       // const filter = { chatroomId: info["_id"] };
       // Chat.find({chatroomId: req.params.roomId}).exec((error, chats) => {
@@ -58,52 +59,49 @@ router.post('/', (req, res) => {
   const image = req.body.image;
   const status = true;
   const time = req.body.time;
-  const filter = {id: req.body.owner};
+  const owner = req.body.owner;
   console.log(req.body)
   console.log(req.body.owner);
-  console.log(filter);
-  User.findOne(filter).exec((err, info) => {
-    if(err)  {
+  ChatRoom.insertMany({ name, owner, maxUser, time, image, status, people: owner }, (err, chatroom) => {
+    if(err) {
+      res.status(404).json({result: 0});
       console.log(err);
-      res.status(500).json({"error": "error"});
     }
-    if(!info) res.status(404).json({"error": "없는 유저"});
     else {
-      console.log(info);
-      const owner = info["_id"];
-      
-      ChatRoom.insertMany({ name, owner, maxUser, time, image, status, $push: {people: owner} }, (err, chatroom) => {
-        if(err) {
-          res.status(404).json({result: 0});
-          console.log(err);
-        }
-        else {
-          console.log('add chatroom 성공');
-          console.log("여기 맞지...?" + chatroom);
-          return res.status(200).send({
-            "result": 1
-          });
-        }
+      console.log('add chatroom 성공');
+      console.log("여기 맞지...?" + chatroom);
+      return res.status(200).send({
+        "result": 1
       });
     }
-  }) 
+  });
 })
 
 router.put('/:id', (req, res) => {
   const userId = req.body.userId;
-  const filter = {chatroomId: req.params.id};
-  User.findOne({id: userId}, (error, user) => {
-    const _id = user["_id"];
+  const filter = {_id: req.params.id};
+  ChatRoom.updateOne(filter, {$push: {people: userId}}, (err, chat) => {
+    if(err) return res.status(500).json({"error": error});
+    if(!chat) return res.status(404).json({"error": error});
+    else {
+      return res.status(200).json({
+        "result": 1
+      })
+    }
+  })
+})
 
-    ChatRoom.updateOne(filter, {$push: {people: _id}}, (err, chat) => {
-      if(err) return res.status(500).json({"error": error});
-      if(!chat) return res.status(404).json({"error": error});
-      else {
-        return res.status(200).json({
-          "result": 1
-        })
-      }
-    })
+router.put('/out/:id', (req, res) => {
+  const userId = req.body.userId;
+  const filter = {_id: req.params.id};
+  ChatRoom.updateOne(filter, {$pull: {people: userId}}, (err, chat) => {
+    if(err) return res.status(500).json({"error": error});
+    if(!chat) return res.status(404).json({"error": error});
+    else {
+      return res.status(200).json({
+        "result": 1
+      })
+    }
   })
 })
 

@@ -17,7 +17,7 @@ router.get('/:id', (req, res) => {
       console.log(info);
       console.log(info["userId"])
       User.findOne({_id: info["userId"]}).exec((error, user) => {
-        if (err) return res.status(500).json({"validation": 0});
+        if (error) return res.status(500).json({"validation": 0});
         if (!user) return res.status(404).json({"validation": 2});
         else {
           return res.status(200).json({
@@ -120,6 +120,20 @@ router.delete('/:id/:userId', (req, res) => {
     if(error) return res.status(500).json({result: 0});
     else return res.status(200).json({result: 1});
   })
+});
+
+// delete feed
+router.delete('/:id', (req, res) => {
+  Feed.deleteOne({_id: req.params.id}, (err, d) => {
+    if(err) return res.status(200).json({result: 0});
+    else {
+      if(d.deletedCount === 1) {
+        console.log(d);
+        return res.status(200).json({result: 1});
+      }
+      else return res.status(200).json({result: 0});
+    }
+  });
 });
 
 module.exports = router;
