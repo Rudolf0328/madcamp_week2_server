@@ -51,9 +51,11 @@ router.get('/', (req, res) => {
   Feed.find().exec((err, feeds) => {
     if(err) return res.status(500).json({"validation": 0});
     if(!feeds) return res.status(404).json({"validation": 2});
-    else return res.status(200).json({ 
-      feeds
-    });
+    else {
+      return res.status(200).json({ 
+        feeds
+      });
+    }
   })
 })
 
@@ -87,7 +89,7 @@ router.post('/:id', (req, res) => {
       });
     }
   })
-})
+      })
 
 // update feed
 router.put('/:id', (req, res) => {
@@ -102,14 +104,22 @@ router.put('/:id', (req, res) => {
 
 
 // delete feed
-router.delete('/:id', (req, res) => {
+router.delete('/:id/:userId', (req, res) => {
   Feed.deleteOne({_id: req.params.id}, (err, d) => {
     if(err) return res.status(200).json({result: 0});
     else {
-      if(d.deletedCount === 1) return res.status(200).json({result: 1});
+      if(d.deletedCount === 1) {
+        console.log(d);
+        return res.status(200).json({result: 1});
+      }
       else return res.status(200).json({result: 0});
     }
   });
+
+  User.updateOne({id: req.params.userId}, {$pull: {feeds: req.params.id}}, (error, result) => {
+    if(error) return res.status(500).json({result: 0});
+    else return res.status(200).json({result: 1});
+  })
 });
 
 module.exports = router;

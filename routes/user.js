@@ -69,7 +69,7 @@ router.put('/:id', (req, res) => {
   const profile = req.body.profile;
   const newId = req.body.newId;
 
-  User.updateOne({id: id},
+  User.updateOne({id: req.params.id},
     {nickName, profile, id: newId},                         // 이름이 name인 사람을 찾아서햐
     function (error, success) {
       if(error) {
